@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import type { Article } from "@/lib/types"
-import { useAuth } from "./auth-context"
 
 interface FavoritesContextType {
   favorites: Article[]
@@ -18,11 +17,14 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(undefin
 export function FavoritesProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<Article[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const { isAuthenticated } = useAuth()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
+    const storedUser = localStorage.getItem("newsapp_user")
+    setIsAuthenticated(!!storedUser)
+
     loadFavorites()
-  }, [isAuthenticated])
+  }, [])
 
   const loadFavorites = async () => {
     setIsLoading(true)

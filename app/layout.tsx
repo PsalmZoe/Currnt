@@ -33,11 +33,11 @@ export default function RootLayout({
       </head>
       <body className={`${montserrat.variable} font-sans antialiased`}>
         <ThemeProvider>
-          <SettingsProvider>
-            <AuthProvider>
+          <AuthProvider>
+            <SettingsProvider>
               <FavoritesProvider>{children}</FavoritesProvider>
-            </AuthProvider>
-          </SettingsProvider>
+            </SettingsProvider>
+          </AuthProvider>
         </ThemeProvider>
         <Analytics />
       </body>
