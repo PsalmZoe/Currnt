@@ -99,7 +99,7 @@ export default function LandingPage() {
               return (
                 <Card
                   key={index}
-                  className="group transition-all hover:shadow-lg animate-in fade-in slide-in-from-bottom-4"
+                  className="group transition-all hover:shadow-lg animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <CardContent className="p-6">
