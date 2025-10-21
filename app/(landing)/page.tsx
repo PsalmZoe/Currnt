@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic"
-
 import Link from "next/link"
 import { ArrowRight, Newspaper, Sparkles, Heart, TrendingUp, Zap, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -133,7 +131,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t bg-muted/50 py-12">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>&copy; 2025 NewsHub. All rights reserved.</p>
+          <p>&copy; 2025 Currnt. All rights reserved.</p>
         </div>
       </footer>
     </div>
