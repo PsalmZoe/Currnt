@@ -38,10 +38,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle("dark", newTheme === "dark")
   }
 
-  if (!mounted) {
-    return null
-  }
-
+  // This prevents build failures during static prerendering on Vercel
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
 }
 
