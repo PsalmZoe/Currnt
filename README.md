@@ -3,10 +3,7 @@
 A beautiful, responsive news reader application built with Next.js, React, and Tailwind CSS. Stay informed with real-time news from around the world, personalized feeds, and a seamless reading experience.
 
 ![Currnt News Reader](https://img.shields.io/badge/Next.js-15.5-black?style=flat-square&logo=next.js)
-![React](https://img.shields.io/badge/React-19.1-blue?style=flat-square&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.1-38B2AC?style=flat-square&logo=tailwind-css)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 ## 🌟 Features
 
