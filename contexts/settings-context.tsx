@@ -115,10 +115,6 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     })
   }
 
-  if (!mounted) {
-    return null
-  }
-
   return (
     <SettingsContext.Provider
       value={{
