@@ -2,10 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Montserrat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import { AuthProvider } from "@/contexts/auth-context"
-import { FavoritesProvider } from "@/contexts/favorites-context"
-import { ThemeProvider } from "@/contexts/theme-context"
-import { SettingsProvider } from "@/contexts/settings-context"
+import { Providers } from "@/components/providers"
 import "./globals.css"
 
 const montserrat = Montserrat({
@@ -32,13 +29,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${montserrat.variable} font-sans antialiased`}>
-        <ThemeProvider>
-          <AuthProvider>
-            <SettingsProvider>
-              <FavoritesProvider>{children}</FavoritesProvider>
-            </SettingsProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <Providers>{children}</Providers>
         <Analytics />
       </body>
     </html>
