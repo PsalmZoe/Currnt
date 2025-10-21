@@ -1,3 +1,7 @@
+"use client"
+
+export const dynamic = "force-dynamic"
+
 import Link from "next/link"
 import { ArrowRight, Newspaper, Sparkles, Heart, TrendingUp, Zap, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
