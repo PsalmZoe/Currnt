@@ -3,7 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Updated theme to match the blue design system from mockup */
 :root {
   /* Deep Blue Primary #1E40AF */
   --primary: #1e40af;
@@ -48,6 +47,7 @@
   --sidebar-accent: #334155;
   --sidebar-accent-foreground: #f1f5f9;
   --sidebar-border: #334155;
+  --sidebar-ring: #3b82f6;
 
   --radius: 0.5rem;
 
@@ -98,6 +98,7 @@
   --sidebar-accent: #1e293b;
   --sidebar-accent-foreground: #f1f5f9;
   --sidebar-border: #1e293b;
+  --sidebar-ring: #60a5fa;
 
   /* Chart colors in dark mode */
   --chart-1: oklch(0.488 0.243 264.376);
@@ -145,6 +146,7 @@
   --color-sidebar-accent: var(--sidebar-accent);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
@@ -152,7 +154,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
   }
 
   /* Added smooth scroll behavior */
