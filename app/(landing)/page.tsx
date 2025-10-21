@@ -97,11 +97,7 @@ export default function LandingPage() {
             {features.map((feature, index) => {
               const Icon = feature.icon
               return (
-                <Card
-                  key={index}
-                  className="group transition-all hover:shadow-lg animate-fade-in"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
+                <Card key={index} className="group transition-all hover:shadow-lg animate-fade-in">
                   <CardContent className="p-6">
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform group-hover:scale-110">
                       <Icon className="h-6 w-6" />
