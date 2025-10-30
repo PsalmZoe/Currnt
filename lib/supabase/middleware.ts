@@ -2,21 +2,24 @@ import { NextResponse, type NextRequest } from "next/server"
 import { createMiddlewareClient } from "@supabase/ssr"
 
 export async function middleware(req: NextRequest) {
-  const res = NextResponse.next()
+  try {
+    const res = NextResponse.next()
 
-  // ✅ Edge-compatible Supabase client
-  const supabase = createMiddlewareClient(
-    { req, res },
-    { isEdge: true } // ensure it runs in the Edge runtime
-  )
+    const supabase = createMiddlewareClient(
+      { req, res },
+      { isEdge: true } // ✅ ensure edge-compatible mode
+    )
 
-  // Optional: check user session
-  await supabase.auth.getUser()
+    // Attempt to refresh / verify session
+    await supabase.auth.getUser()
 
-  return res
+    return res
+  } catch (err) {
+    console.error("Middleware error:", err)
+    return NextResponse.next() // avoid 500s by falling back
+  }
 }
 
-// ✅ Explicitly mark this as an Edge function
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
   runtime: "edge",
