@@ -1,41 +1,15 @@
 import { NextResponse, type NextRequest } from "next/server"
+import { createMiddlewareClient } from "@supabase/ssr"
 
-export async function updateSession(request: NextRequest) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-  // If Supabase is not configured, skip middleware processing
-  if (!supabaseUrl || !supabaseKey) {
-    return NextResponse.next({ request })
-  }
-
-  // Dynamically import in Edge-compatible way
-  const { createServerClient } = await import("@supabase/ssr")
-
-  let supabaseResponse = NextResponse.next({ request })
-
-  const supabase = createServerClient(supabaseUrl, supabaseKey, {
-    cookies: {
-      getAll() {
-        return request.cookies.getAll()
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
-        supabaseResponse = NextResponse.next({ request })
-        cookiesToSet.forEach(({ name, value, options }) =>
-          supabaseResponse.cookies.set(name, value, options)
-        )
-      },
-    },
-    isEdge: true, // ✅ ensures Edge runtime compatibility
-  })
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next()
+  const supabase = createMiddlewareClient({ req, res }, { isEdge: true })
 
   await supabase.auth.getUser()
 
-  return supabaseResponse
+  return res
 }
 
-// ✅ Explicitly mark as Edge middleware
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
   runtime: "edge",
