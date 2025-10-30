@@ -1,13 +1,18 @@
+// middleware.ts
 import { NextResponse, type NextRequest } from "next/server"
-import { createMiddlewareClient } from "@supabase/ssr"
+import { createServerClient } from "@supabase/ssr"
 
 export async function middleware(req: NextRequest) {
   try {
     const res = NextResponse.next()
 
-    const supabase = createMiddlewareClient(
-      { req, res },
-      { isEdge: true } // ✅ Edge-compatible
+    // Use createServerClient instead of createMiddlewareClient
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: req.cookies, // minimal Edge-compatible cookie handling
+      }
     )
 
     // Optional: check user session
@@ -16,11 +21,13 @@ export async function middleware(req: NextRequest) {
     return res
   } catch (err) {
     console.error("Middleware error:", err)
-    return NextResponse.next() // fallback to avoid 500
+    return NextResponse.next()
   }
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
-  runtime: "edge", // make explicit
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+  runtime: "experimental-edge", // required for Next.js Edge runtime
 }
